@@ -18,13 +18,19 @@ class Day2 {
         1112	1260	809	72	1104	156	104	1253	793	462	608	84	99	1174	449	929
         707	668	1778	1687	2073	1892	62	1139	908	78	1885	800	945	712	57	65"""
 
+    fun getRows(str: String): List<String> {
+        return str.split("[\\n]".toRegex())
+    }
+
+    fun getCols(row: String): List<Int> {
+        return row.trim().split("[\\t\\s]".toRegex()).map { col -> col.toInt() }
+    }
+
     fun part1() {
         var sum = 0
-        val rows = input.split("[\\n]".toRegex())
-
-
-        for(row in rows) {
-            val cols = row.trim().split("[\\t\\s]".toRegex()).map{col -> col.toInt()}
+        val rows = getRows(input)
+        for (row in rows) {
+            val cols = getCols(row)
             val lowestValue = cols.min() ?: throw IllegalArgumentException("lowest")
             val highestValue = cols.max() ?: throw IllegalArgumentException("highest")
             val diff = highestValue.minus(lowestValue)
@@ -37,10 +43,34 @@ class Day2 {
 
 
     fun part2() {
+        var sum = 0
+        val rows = getRows(input)
+        for (row in rows) {
+            val cols = getCols(row)
+            for (i in cols.indices) {
+                val col = cols[i]
+                for (j in 0 until cols.size) {
+                    if (i !== j) {
+                        val otherCol = cols[j]
+                        println("$col & $otherCol === ${col % otherCol}")
+                        if (col % otherCol === 0) {
+                            val dividends = intArrayOf(col, otherCol)
+                            val min = dividends.min() ?: throw IllegalArgumentException("lowest")
+                            val max = dividends.max() ?: throw IllegalArgumentException("highest")
+                            val diff = max / min
+                            println("$max / $min = $diff, Imma gonna add this")
+                            sum += diff
+                        }
+                    }
+                }
+            }
+        }
 
+        println("Total sum is $sum")
     }
 
     fun run() {
         part1()
+        part2()
     }
 }

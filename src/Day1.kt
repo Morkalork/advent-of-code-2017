@@ -51,7 +51,7 @@ class Day1 {
     }
 
     fun run() {
-        // part1()
+        part1()
         part2()
     }
 }
