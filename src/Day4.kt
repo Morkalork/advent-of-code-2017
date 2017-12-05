@@ -1,4 +1,4 @@
-import com.morkalork.adventOfCode.*
+package com.morkalork.adventOfCode
 import java.io.File
 
 class Day4 {

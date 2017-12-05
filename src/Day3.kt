@@ -1,4 +1,4 @@
-import com.morkalork.adventOfCode.*
+package com.morkalork.adventOfCode
 
 class Day3 {
 
